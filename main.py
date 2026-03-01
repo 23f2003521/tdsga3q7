@@ -16,6 +16,13 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # =============================
 # Request & Response Schema
@@ -88,6 +95,11 @@ response_schema = {
 # =============================
 # Main Endpoint
 # =============================
+
+
+@app.get("/")
+def health():
+    return {"status": "running"}
 
 @app.post("/ask", response_model=AskResponse)
 def ask(request: AskRequest):
