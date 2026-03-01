@@ -5,6 +5,7 @@ import yt_dlp
 import google.generativeai as genai
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Literal
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
